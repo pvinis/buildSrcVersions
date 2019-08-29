@@ -47,6 +47,28 @@ dependencies {
     implementation("com.squareup.okio:okio:2.1.0")
     implementation( "com.squareup.moshi:moshi:1.7.0")
     implementation("com.squareup:kotlinpoet:1.3.0")
+
+    val spekVersion = "2.0.0"
+    val junitPlatformVersion = "1.1.0"
+
+
+    testImplementation(kotlin("test"))
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion") {
+        exclude(group = "org.jetbrains.kotlin")
+    }
+
+    testRuntimeOnly(kotlin("reflect"))
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
+        exclude(group = "org.junit.platform")
+        exclude(group = "org.jetbrains.kotlin")
+    }
+
+    testImplementation("org.junit.platform:junit-platform-launcher:$junitPlatformVersion")
+
+    testImplementation("org.jsoup:jsoup:1.10.2") {
+        because("Integration tests parse generated HTML for verification")
+    }
+    testImplementation(gradleTestKit())
 }
 
 
