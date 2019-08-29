@@ -13,10 +13,16 @@ tasks.register("publishLocally") {
     description = "Publish the plugin locally"
     dependsOn(gradle.includedBuild("buildSrcVersions").task(":publish"))
 }
+
 tasks.register("publishPlugins") {
     group = "Custom"
     description = "Publishes this plugin to the Gradle Plugin portal."
     dependsOn(gradle.includedBuild("buildSrcVersions").task(":publishPlugins"))
+}
+
+tasks.register("gradleTestKit") {
+    group = "Custom"
+    dependsOn(gradle.includedBuild("buildSrcVersions").task(":test"))
 }
 
 tasks.register("checkAll") {

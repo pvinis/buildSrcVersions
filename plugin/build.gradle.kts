@@ -39,14 +39,14 @@ pluginBundle {
     tags = listOf("dependencies", "versions", "buildSrc", "kotlin", "kotlin-dsl")
 }
 dependencies {
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.1.9")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.0")
+    testCompile(gradleTestKit())
 
     implementation("com.github.ben-manes:gradle-versions-plugin:0.22.0")
 
     implementation("com.squareup.okio:okio:2.1.0")
     implementation( "com.squareup.moshi:moshi:1.7.0")
     implementation("com.squareup:kotlinpoet:1.3.0")
-
 }
 
 
