@@ -11,8 +11,10 @@ internal open class BuildSrcVersionsExtensionImpl(
     override var versionsOnlyMode: VersionsOnlyMode? = null,
     override var versionsOnlyFile: String? = null,
     var useFqqnFor: List<String> = emptyList(),
-    var alwaysUpdateVersions: Boolean = false
+    var alwaysUpdateVersions: Boolean = false,
+    override var groupDependencies: Map<String, String> = emptyMap()
 ) : BuildSrcVersionsExtension, java.io.Serializable {
+
 
     // Necessary because of https://github.com/jmfayard/buildSrcVersions/issues/92
     fun defensiveCopy(): BuildSrcVersionsExtensionImpl = BuildSrcVersionsExtensionImpl(

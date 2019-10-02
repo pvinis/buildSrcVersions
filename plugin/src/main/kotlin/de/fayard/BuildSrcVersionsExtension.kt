@@ -73,5 +73,8 @@ interface BuildSrcVersionsExtension {
      */
     var versionsOnlyFile: String?
 
+    // https://github.com/jmfayard/buildSrcVersions/pull/46
+    // https://github.com/jmfayard/buildSrcVersions/issues/90
+    var groupDependencies: Map<String, String>
 
 }

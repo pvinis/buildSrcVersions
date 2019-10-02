@@ -9,29 +9,7 @@ plugins {
 group = "de.fayard"
 
 buildSrcVersions {
-    // See configuration options at https://github.com/jmfayard/buildSrcVersions/issues/53
-    indent = "     "
-}
-
-repositories {
-    maven {
-        setUrl("../plugin/src/test/resources/maven")
-    }
-    mavenCentral()
-}
-
-dependencies {
-    compile("com.google.guava:guava:15.0")
-    compile("com.google.inject:guice:2.0")
-}
-
-def isNonStable = { String version ->
-    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
-    def regex = /^[0-9,.v-]+$/
-    return !stableKeyword && !(version ==~ regex)
-}
-
-buildSrcVersions {
+    groupDependencies = ["room": "androidx.room", "splitties": "com.louiscad.splitties"]
     useFqdnFor('module')
     renameLibs = "Libs"
     renameVersions = "Versions"
@@ -40,6 +18,37 @@ buildSrcVersions {
 //        isNonStable(candidate.version) && !isNonStable(currentVersion)
 //    }
 }
+
+repositories {
+    maven {
+        setUrl("../plugin/src/test/resources/maven")
+    }
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    compile("com.google.guava:guava:15.0")
+    compile("com.google.inject:guice:2.0")
+
+    implementation(Libs.splitties.android_base)
+    implementation(Libs.room.room_runtime)
+
+    def splitties = "3.0.0-alpha06"
+    implementation("com.louiscad.splitties:splitties-fun-pack-android-base:$splitties")
+    implementation("com.louiscad.splitties:splitties-fun-pack-android-base-with-views-dsl:$splitties")
+    def room_version = "2.2.0-rc01"
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
+}
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
     gradleVersion = findProperty("gradleLatestVersion") ?: gradle.gradleVersion
