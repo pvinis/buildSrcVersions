@@ -15,6 +15,7 @@ group = "de.fayard"
 buildSrcVersions {
     // See configuration options at https://github.com/jmfayard/buildSrcVersions/issues/53
     indent = "     "
+    rejectVersionIf { false }
 }
 
 repositories {
@@ -27,6 +28,7 @@ repositories {
 dependencies {
     implementation("com.google.guava:guava:15.0")
     implementation("com.google.inject:guice:2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
 }
 
 tasks.withType<KotlinCompile> {
